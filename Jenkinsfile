@@ -14,7 +14,10 @@ node {
 
   stage('Deploy frontend'){
     withCredentials([sshUserPrivateKey(credentialsId: "scp-credential", keyFileVariable: 'keyfile')]) {
-      sh "scp -i ${keyfile} -rp * azureuser@52.165.33.103:/serv/"
+      sh """
+      scp -i ${keyfile} \
+        -rp app azureuser@52.165.33.103:/serv/
+      """
     }
   } 
   
