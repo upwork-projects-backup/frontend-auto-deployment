@@ -8,8 +8,12 @@ node {
     sh "npm install"  
   }
   
+  stage('Test frontend'){
+    sh "npm run test"
+  }  
+  
   stage('Deploy frontend'){
-    sh "deploy frontend"
+    print "deploy frontend"
   }
  
 }
