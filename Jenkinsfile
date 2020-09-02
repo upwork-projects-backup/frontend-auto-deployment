@@ -11,9 +11,11 @@ node {
   stage('Test frontend'){
     sh "npm run test"
   }  
-  
+
   stage('Deploy frontend'){
-    print "deploy frontend"
-  }
- 
+    withCredentials([sshUserPrivateKey(credentialsId: "scp-credential", keyFileVariable: 'keyfile')]) {
+      sh "scp -i ${keyfile} -rp * azureuser@52.165.33.103:/serv/"
+    }
+  } 
+  
 }
